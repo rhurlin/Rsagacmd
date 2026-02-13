@@ -80,7 +80,8 @@ saga_env <-
       tool_names_file <- tool_files[which.min(nchar(tool_files))]
       
       # get library description
-      lib_html <- rvest::read_html(paste(libdir, tool_names_file, sep = "/"))
+      lib_html <- rvest::read_html(paste(libdir, tool_names_file, sep = "/"),
+                                   encoding = "UTF-8")
       
       lib_description_html <- rvest::html_elements(
         lib_html,
@@ -99,7 +100,8 @@ saga_env <-
       for (tool in tool_files) {
         tryCatch(
           expr = {
-            html <- rvest::read_html(paste(libdir, tool, sep = "/"))
+            html <- rvest::read_html(paste(libdir, tool, sep = "/"),
+                                     encoding = "UTF-8")
             options <- rvest::html_table(html, trim = TRUE)
 
             description_html <-
